@@ -1,14 +1,12 @@
 #include <ctype.h>
 #include <string.h>
+#include "scanner.h"
 #include "token.h"
 #include "fsaTable.h"
 
-int currentFSAPosition;
-int currentFilePosition;
-char nextChar;
-int lineNumeber;
 
-struct token getNextToken() {
+struct token getNextToken(char* fileName) {
+    nextChar = fgetc(fileName);
     int state = 0;
     int nextState;
     struct token newToken;
@@ -26,18 +24,18 @@ struct token getNextToken() {
                 int i;
                 for (i = 0; i < keywordListSize; i++){
                     if (tokenText == keywordList[i]){
-                        newToken.tokenID = state;
+                        newToken.tokenId = state;
                         newToken.tokenInstance = tokenText;
                         newToken.lineNum = lineNumeber;
                         return newToken;
                     }
                 }
-                newToken.tokenID = state;
+                newToken.tokenId = state;
                 newToken.tokenInstance = tokenText;
                 newToken.lineNum = lineNumeber;
                 return newToken;
             } else {
-                newToken.tokenID = state;
+                newToken.tokenId = state;
                 newToken.tokenInstance = tokenText;
                 newToken.lineNum = lineNumeber;
                 return (newToken);
@@ -45,7 +43,7 @@ struct token getNextToken() {
         } else {
             state = nextState;
             strcat(tokenText, nextChar);
-            nextChar = getchar();
+            nextChar = fgetc(fileName);
         }
     }
 }

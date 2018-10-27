@@ -1,7 +1,7 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-    enum tokenID {
+    enum tokenIdEnum {
         eofTk = 1003, 
         idTk = 1000,
         intTk = 1001,
@@ -18,7 +18,7 @@
     };
 
     struct token {
-        enum tokenID;
+        enum tokenIdEnum tokenId;
         char* tokenInstance;
         int lineNum;
     };
