@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "fsaTable.h"
 
-const int fsaTable[rowSize][colSize] = {
+int fsaTable[rowSize][colSize] = {
     {1,1,1001,3},
     {-1,1,1001,3},
     {-1,1,1001,3},
@@ -13,7 +13,7 @@ const int fsaTable[rowSize][colSize] = {
     {1003,1000,1001,1003},
     {-1,-1,-1,3}
 };
-const char* keywordList[keywordListSize] = {
+char* keywordList[keywordListSize] = {
     "start",
     "stop",
     "loop",
@@ -27,7 +27,7 @@ const char* keywordList[keywordListSize] = {
     "then",
     "let"
 };
-const char opDelList[opDelListSize] = {
+char opDelList[opDelListSize] = {
     '=',
     '<',
     '>',
@@ -51,8 +51,6 @@ const char opDelList[opDelListSize] = {
 int isInOpDel(char c);
 
 int charToColumn(char c){
-    char c;
-
     if (isalpha(c)){
         if (islower(c)){
             return 0;
@@ -74,6 +72,7 @@ int charToColumn(char c){
     } else {
         return 8;
     }
+    return 8;
 }
 
 int isInOpDel(char c){

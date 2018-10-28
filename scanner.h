@@ -1,11 +1,13 @@
-#ifndef FSATABLE_H
-#define FSATABLE_H
+#ifndef SCANNER_H
+#define SCANNER_H
+
+    #include <stdio.h>
 
     int currentFSAPosition;
     int currentFilePosition;
     char nextChar;
-    int lineNumeber;
+    int lineNumber;
 
-    struct token getNextToken(char* fileName);
+    struct token getNextToken(FILE* fileName);
 
 #endif

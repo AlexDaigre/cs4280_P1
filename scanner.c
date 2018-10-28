@@ -1,11 +1,12 @@
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "scanner.h"
 #include "token.h"
 #include "fsaTable.h"
 
-
-struct token getNextToken(char* fileName) {
+struct token getNextToken(FILE* fileName) {
     nextChar = fgetc(fileName);
     int state = 0;
     int nextState;
@@ -13,11 +14,13 @@ struct token getNextToken(char* fileName) {
     char tokenText[8];
     while(state<1000) {
         if (nextChar == '\n'){
-            lineNumeber++;
+            lineNumber++;
         }
-        nextState = fsaTable[state][charToColumn(nextChar)];
+        int stateNumber = charToColumn(nextChar);
+        nextState = fsaTable[state][stateNumber];
         if (nextState < 0){
-            ERROR();
+            printf("LEX ERROR at line %d", lineNumber);
+            exit(1);
         }
         if (nextState >= 1000) {
             if (nextState == 1000) {
@@ -26,18 +29,18 @@ struct token getNextToken(char* fileName) {
                     if (tokenText == keywordList[i]){
                         newToken.tokenId = state;
                         newToken.tokenInstance = tokenText;
-                        newToken.lineNum = lineNumeber;
+                        newToken.lineNum = lineNumber;
                         return newToken;
                     }
                 }
                 newToken.tokenId = state;
                 newToken.tokenInstance = tokenText;
-                newToken.lineNum = lineNumeber;
+                newToken.lineNum = lineNumber;
                 return newToken;
             } else {
                 newToken.tokenId = state;
                 newToken.tokenInstance = tokenText;
-                newToken.lineNum = lineNumeber;
+                newToken.lineNum = lineNumber;
                 return (newToken);
             }
         } else {
@@ -46,4 +49,6 @@ struct token getNextToken(char* fileName) {
             nextChar = fgetc(fileName);
         }
     }
+    printf("LEX ERROR at line %d", lineNumber);
+    exit(1);
 }

@@ -8,8 +8,8 @@
 
     extern int fsaTable[rowSize][colSize];
     extern char* keywordList[keywordListSize];
+    extern char* tokenNames[];
     enum tokenID;
-    char* tokenNames[];
 
     int charToColumn(char c);
 

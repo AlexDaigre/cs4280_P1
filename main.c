@@ -8,7 +8,7 @@ int main (int argc, char *argv[]) {
 
     struct token newToken;
     do {
-        newToken = getNextToken(fileName);
-        
+        newToken = getNextToken(sourceFile);
+
     } while ( newToken.tokenId != eofTk);
 }
