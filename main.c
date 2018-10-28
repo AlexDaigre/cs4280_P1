@@ -6,7 +6,7 @@
 #include "scanner.h"
 
 int main (int argc, char *argv[]) {
-    char* sourceFileName = "P1_test1.fs182";
+    char* sourceFileName = "P1_test2.fs182";
     // char* fileExtention = ".fs182";
     if (argc == 2) {
         // sourceFileName = argv[1];
@@ -24,9 +24,10 @@ int main (int argc, char *argv[]) {
     }
 
     struct token newToken;
+
     do {
         newToken = getNextToken(sourceFile);
-        printf("MAIN:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+        // printf("MAIN:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
     } while ( newToken.tokenId != 1003);
 
     fclose(sourceFile);

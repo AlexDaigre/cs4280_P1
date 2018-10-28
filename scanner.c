@@ -6,17 +6,14 @@
 #include "token.h"
 #include "fsaTable.h"
 
-struct token getNextToken(FILE* fileName) {
-    nextChar = fgetc(fileName);
+struct token getNextToken(FILE* sourceFile) {
+    nextChar = fgetc(sourceFile);
     int state = 0;
     int nextState;
     struct token newToken;
-    char tokenText[8];
+    char tokenText[8] = "";
     int tokenTextLength = 0;
     while(state<1000) {
-        if (nextChar == '\n'){
-            lineNumber++;
-        }
         int charGroup = charToColumn(nextChar);
         nextState = fsaTable[charGroup][state];
         // printf("nextState: %d\n", nextState);
@@ -25,6 +22,7 @@ struct token getNextToken(FILE* fileName) {
             exit(1);
         }
         if (nextState >= 1000) {
+            ungetc(nextChar, sourceFile);
             if (nextState == 1000) {
                 int i;
                 for (i = 0; i < keywordListSize; i++){
@@ -32,31 +30,34 @@ struct token getNextToken(FILE* fileName) {
                         newToken.tokenId = nextState;
                         newToken.tokenInstance = tokenText;
                         newToken.lineNum = lineNumber;
-                        // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                        printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                         return newToken;
                     }
                 }
                 newToken.tokenId = nextState;
                 newToken.tokenInstance = tokenText;
                 newToken.lineNum = lineNumber;
-                // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                 return newToken;
             } else {
                 newToken.tokenId = nextState;
                 newToken.tokenInstance = tokenText;
                 newToken.lineNum = lineNumber;
-                // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                 return (newToken);
             }
         } else {
             state = nextState;
+            if (nextChar == '\n'){
+                lineNumber++;
+            }
             // printf("nextChar: %c\n  tokenTextLength: %d\n", nextChar, tokenTextLength);
             tokenText[tokenTextLength] = nextChar;
             tokenTextLength++;
-            if (tokenTextLength > 8){
-                exit(1);
-            }
-            nextChar = fgetc(fileName);
+            // if (tokenTextLength > 8){
+            //     exit(1);
+            // }
+            nextChar = fgetc(sourceFile);
         }
     }
     printf("LEX ERROR at line %d\n", lineNumber);

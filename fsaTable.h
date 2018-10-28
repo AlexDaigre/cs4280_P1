@@ -2,7 +2,7 @@
 #define FSATABLE_H
 
     #define rowSize 9
-    #define colSize 4
+    #define colSize 5
     #define keywordListSize 12
     #define opDelListSize 18
 
