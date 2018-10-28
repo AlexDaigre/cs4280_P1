@@ -11,7 +11,7 @@ struct token getNextToken(FILE* sourceFile) {
     int state = 0;
     int nextState;
     struct token newToken;
-    char tokenText[8] = "";
+    char tokenText[9] = "";
     int tokenTextLength = 0;
     while(state<1000) {
         int charGroup = charToColumn(nextChar);
@@ -52,8 +52,10 @@ struct token getNextToken(FILE* sourceFile) {
                 lineNumber++;
             }
             // printf("nextChar: %c\n  tokenTextLength: %d\n", nextChar, tokenTextLength);
-            tokenText[tokenTextLength] = nextChar;
-            tokenTextLength++;
+            if (!isspace(nextChar)){
+                tokenText[tokenTextLength] = nextChar;
+                tokenTextLength++;
+            }
             // if (tokenTextLength > 8){
             //     exit(1);
             // }
