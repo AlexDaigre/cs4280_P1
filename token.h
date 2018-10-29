@@ -9,7 +9,9 @@
         keywordTK = 1004
     }; 
 
-    extern char* tokenNames[];
+    char* getTokenName(enum tokenIdEnum newToken);
+
+    char* getTokenDescription(enum tokenIdEnum newToken);
 
     struct token {
         enum tokenIdEnum tokenId;

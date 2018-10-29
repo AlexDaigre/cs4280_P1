@@ -8,6 +8,6 @@ void testScanner(FILE* sourceFile){
     lineNumber = 1;
     do {
         newToken = getNextToken(sourceFile);
-        printf("MAIN:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+        printf("%s: %s - Token Instance: %s - Line Number: %d\n", getTokenName(newToken.tokenId), getTokenDescription(newToken.tokenId), newToken.tokenInstance, newToken.lineNum);
     } while ( newToken.tokenId != 1003);
 }

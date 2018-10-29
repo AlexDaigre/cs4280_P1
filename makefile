@@ -1,7 +1,7 @@
 CC      = gcc
 CFLAGS  = -g
 TARGET = scanner
-OBJS   = main.o scanner.o fsaTable.o testScanner.o
+OBJS   = main.o scanner.o fsaTable.o testScanner.o token.o
 
 $(TARGET): $(OBJS)
 	$(CC) -o $(TARGET) $(OBJS)
@@ -17,6 +17,9 @@ fsaTable.o: fsaTable.c
 
 testScanner.o: testScanner.c
 	$(CC) $(CFLAGS) -c testScanner.c
+
+token.o: token.c
+	$(CC) $(CFLAGS) -c token.c
 
 clean:
 	/bin/rm -f *.o $(TARGET)

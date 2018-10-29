@@ -15,7 +15,7 @@ int main (int argc, char *argv[]) {
         return 1;
     }
     
-    printf("Reading: %s\n", sourceFileName);
+    // printf("Reading: %s\n", sourceFileName);
 
     FILE* sourceFile = fopen(sourceFileName, "r");
     if (sourceFile == NULL){
