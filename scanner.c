@@ -24,10 +24,11 @@ struct token getNextToken(FILE* sourceFile) {
         if (nextState >= 1000) {
             ungetc(nextChar, sourceFile);
             if (nextState == 1000) {
-                int i;
-                for (i = 0; i < keywordListSize; i++){
-                    if (tokenText == keywordList[i]){
-                        newToken.tokenId = nextState;
+                int n;
+                for (n = 0; n < keywordListSize; n++){
+                    // printf("tokenText: %s keywordList[n]: %s\n", tokenText, keywordList[n]);
+                    if (strcmp(tokenText, keywordList[n]) == 0){
+                        newToken.tokenId = 1004;
                         newToken.tokenInstance = tokenText;
                         newToken.lineNum = lineNumber;
                         printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
