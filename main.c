@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "token.h"
-#include "scanner.h"
+#include "testScanner.h"
 
 int main (int argc, char *argv[]) {
     char* sourceFileName = "P1_test4.fs182";
@@ -23,12 +22,7 @@ int main (int argc, char *argv[]) {
         printf("Could not open %s: %d\n", sourceFileName, errno);
     }
 
-    struct token newToken;
-    lineNumber = 1;
-    do {
-        newToken = getNextToken(sourceFile);
-        printf("MAIN:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
-    } while ( newToken.tokenId != 1003);
+    testScanner(sourceFile);
 
     fclose(sourceFile);
 }
