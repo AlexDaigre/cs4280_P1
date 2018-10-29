@@ -1,9 +1,10 @@
-CC      = gcc
-CFLAGS  = -g
+CC     = gcc
+CFLAGS = -g
 TARGET = scanner
 OBJS   = main.o scanner.o fsaTable.o testScanner.o token.o
+DEPS   = scanner.h fsaTable.h testScanner.h token.h
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) $(DEPS)
 	$(CC) -o $(TARGET) $(OBJS)
 
 main.o: main.c
