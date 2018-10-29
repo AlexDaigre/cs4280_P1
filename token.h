@@ -13,7 +13,7 @@
 
     struct token {
         enum tokenIdEnum tokenId;
-        char* tokenInstance;
+        char tokenInstance[9];
         int lineNum;
     };
     

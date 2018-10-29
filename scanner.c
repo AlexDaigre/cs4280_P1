@@ -29,22 +29,22 @@ struct token getNextToken(FILE* sourceFile) {
                     // printf("tokenText: %s keywordList[n]: %s\n", tokenText, keywordList[n]);
                     if (strcmp(tokenText, keywordList[n]) == 0){
                         newToken.tokenId = 1004;
-                        newToken.tokenInstance = tokenText;
+                        strcpy(newToken.tokenInstance, tokenText);
                         newToken.lineNum = lineNumber;
-                        printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                        // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                         return newToken;
                     }
                 }
                 newToken.tokenId = nextState;
-                newToken.tokenInstance = tokenText;
+                strcpy(newToken.tokenInstance, tokenText);
                 newToken.lineNum = lineNumber;
-                printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                 return newToken;
             } else {
                 newToken.tokenId = nextState;
-                newToken.tokenInstance = tokenText;
+                strcpy(newToken.tokenInstance, tokenText);
                 newToken.lineNum = lineNumber;
-                printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
+                // printf("SCANNER:\n  Token ID: %d\n  Token Instance: %s\n  Line Number: %d\n", newToken.tokenId, newToken.tokenInstance, newToken.lineNum);
                 return (newToken);
             }
         } else {
