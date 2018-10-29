@@ -18,7 +18,7 @@ struct token getNextToken(FILE* sourceFile) {
         nextState = fsaTable[charGroup][state];
         // printf("nextState: %d\n", nextState);
         if (nextState < 0){
-            printf("LEX ERROR at line %d\n", lineNumber);
+            printf("SCANNER ERROR: Invalid charecter %c at line %d\n", nextChar, lineNumber);
             exit(1);
         }
         if (nextState >= 1000) {
@@ -65,6 +65,6 @@ struct token getNextToken(FILE* sourceFile) {
             nextChar = fgetc(sourceFile);
         }
     }
-    printf("LEX ERROR at line %d\n", lineNumber);
+    printf("SCANNER ERROR: unknown execption at line %d\n", lineNumber);
     exit(1);
 }
