@@ -53,7 +53,9 @@ struct token getNextToken(FILE* sourceFile) {
                 lineNumber++;
             }
             // printf("nextChar: %c\n  tokenTextLength: %d\n", nextChar, tokenTextLength);
-            if (!isspace(nextChar)){
+            if (isspace(nextChar)){
+            } else if (state == 3 || nextChar == '$'){
+            } else {
                 tokenText[tokenTextLength] = nextChar;
                 tokenTextLength++;
             }

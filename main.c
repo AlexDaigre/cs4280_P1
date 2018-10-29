@@ -6,7 +6,7 @@
 #include "scanner.h"
 
 int main (int argc, char *argv[]) {
-    char* sourceFileName = "P1_test2.fs182";
+    char* sourceFileName = "P1_test4.fs182";
     // char* fileExtention = ".fs182";
     if (argc == 2) {
         // sourceFileName = argv[1];
