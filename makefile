@@ -10,7 +10,7 @@ $(TARGET): $(OBJS) $(DEPS)
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
 
-scanner.o: scanner.c token.h fsaTable.h
+scanner.o: scanner.c
 	$(CC) $(CFLAGS) -c scanner.c
 
 fsaTable.o: fsaTable.c
